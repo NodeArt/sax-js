@@ -106,6 +106,8 @@ Settings supported:
 * `strictEntities` - Boolean. If true, only parse [predefined XML
   entities](http://www.w3.org/TR/REC-xml/#sec-predefined-ent)
   (`&amp;`, `&apos;`, `&gt;`, `&lt;`, and `&quot;`)
+* `parseAsText` - Array[String]. Tags that will be parsed as strings completely
+  without handling nested tags. Useful for handling unescaped values in tags.
 
 ## Methods
 
