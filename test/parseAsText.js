@@ -22,3 +22,29 @@ require(__dirname).test({
     parseAsText: ['name']
   }
 })
+
+require(__dirname).test({
+  xml: '<root>' +
+  '<nameTrim>  data< data < <  </nameTrim>' +
+  '<p>hello</p>' +
+  '</root>',
+  expect: [
+    ['opentagstart', {name: 'root', attributes: {}}],
+    ['opentag', {name: 'root', attributes: {}, isSelfClosing: false}],
+    ['opentagstart', {name: 'nametrim', attributes: {}}],
+    ['opentag', {name: 'nametrim', attributes: {}, isSelfClosing: false}],
+    ['text', 'data< data < <'],
+    ['closetag', 'nametrim'],
+    ['opentagstart', {name: 'p', attributes: {}}],
+    ['opentag', {name: 'p', attributes: {}, isSelfClosing: false}],
+    ['text', 'hello'],
+    ['closetag', 'p'],
+    ['closetag', 'root']
+  ],
+  strict: false,
+  opt: {
+    lowercase: true,
+    trim: true,
+    parseAsText: ['nametrim']
+  }
+})
